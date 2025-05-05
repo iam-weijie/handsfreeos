@@ -39,10 +39,10 @@
       if (lastY !== null && now - lastScrollTime > 200) {
         const diff = lastY - y;
         if (diff > 0.03) {
-          window.scrollBy(0, -150); // scroll up
+          window.scrollBy(0, 500); // scroll up
           lastScrollTime = now;
         } else if (diff < -0.03) {
-          window.scrollBy(0, 150); // scroll down
+          window.scrollBy(0, -500); // scroll down
           lastScrollTime = now;
         }
       }
