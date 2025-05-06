@@ -26,7 +26,7 @@
     minTrackingConfidence: 0.7,
   });
 
-  let isPinching = false;
+  let wasPinching = false;
 
   function getDistance(a, b) {
     const dx = a.x - b.x;
@@ -40,17 +40,18 @@
       const thumbTip = landmarks[4];
       const indexTip = landmarks[8];
       const distance = getDistance(thumbTip, indexTip);
-      isPinching = distance < 0.04; // tweak threshold if needed
+
+      const isPinching = distance < 0.04;
+
+      if (isPinching && !wasPinching) {
+        window.scrollBy(0, 100); // scroll down once
+      }
+
+      wasPinching = isPinching;
     } else {
-      isPinching = false;
+      wasPinching = false;
     }
   });
-
-  setInterval(() => {
-    if (isPinching) {
-      window.scrollBy(0, 30);
-    }
-  }, 50);
 
   const camera = new Camera(video, {
     onFrame: async () => {
