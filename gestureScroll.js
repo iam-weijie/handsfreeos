@@ -49,14 +49,13 @@
   hands.onResults((results) => {
     if (results.multiHandLandmarks.length > 0) {
       const landmarks = results.multiHandLandmarks[0];
+
       const isPinchingGesture = isPinching(landmarks);
       const isPointingGesture = isPointing(landmarks);
 
       if (isPinchingGesture) {
         window.scrollBy(0, 50); // scroll down
-      }
-
-      if (isPointingGesture) {
+      } else if (isPointingGesture) {
         window.scrollBy(0, -50); // scroll up
       }
     }
