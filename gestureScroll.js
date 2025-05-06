@@ -1,5 +1,4 @@
 (async () => {
-  if (window.JediScrollActive) return;
   window.JediScrollActive = true;
 
   const script = document.createElement("script");
@@ -29,7 +28,7 @@
     minTrackingConfidence: 0.7,
   });
 
-  let lastScrollTime = 0;
+  let scrollDirection = 0;
 
   hands.onResults((results) => {
     if (results.multiHandLandmarks.length > 0) {
@@ -63,19 +62,6 @@
   try {
     await navigator.mediaDevices.getUserMedia({ video: true });
     camera.start();
-
-    // 🛑 Stop function to disable
-    window.stopJediScroll = () => {
-      try {
-        camera.stop();
-        video.remove();
-        window.JediScrollActive = false;
-        delete window.stopJediScroll;
-        alert("🛑 Jedi Scroll stopped.");
-      } catch (e) {
-        console.warn("Failed to stop Jedi Scroll:", e);
-      }
-    };
   } catch (err) {
     alert("Camera access denied or blocked.");
     console.warn(err);
