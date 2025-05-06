@@ -32,7 +32,8 @@
 
   hands.onResults((results) => {
     if (results.multiHandLandmarks.length > 0) {
-      const y = results.multiHandLandmarks[0][0].y;
+      const y = results.multiHandLandmarks[0][8].y;
+      // y value of the index finger tip (landmark 8)
 
       if (y < 0.35) {
         scrollDirection = -1; // scroll up
