@@ -32,17 +32,32 @@
     return Math.sqrt(dx * dx + dy * dy);
   }
 
+  function isPinching(landmarks) {
+    const thumbTip = landmarks[4];
+    const indexTip = landmarks[8];
+    return getDistance(thumbTip, indexTip) < 0.035;
+  }
+
+  function isPointing(landmarks) {
+    const indexUp = landmarks[8].y < landmarks[6].y - 0.03;
+    const othersDown = [12, 16, 20].every(
+      (tip) => landmarks[tip].y > landmarks[tip - 2].y - 0.01
+    );
+    return indexUp && othersDown;
+  }
+
   hands.onResults((results) => {
     if (results.multiHandLandmarks.length > 0) {
       const landmarks = results.multiHandLandmarks[0];
-      const thumbTip = landmarks[4];
-      const indexTip = landmarks[8];
-      const distance = getDistance(thumbTip, indexTip);
+      const isPinchingGesture = isPinching(landmarks);
+      const isPointingGesture = isPointing(landmarks);
 
-      const isPinching = distance < 0.04;
+      if (isPinchingGesture) {
+        window.scrollBy(0, 50); // scroll down
+      }
 
-      if (isPinching) {
-        window.scrollBy(0, 100); // scroll down once
+      if (isPointingGesture) {
+        window.scrollBy(0, -50); // scroll up
       }
     }
   });
