@@ -38,12 +38,9 @@
     return getDistance(thumbTip, indexTip) < 0.035;
   }
 
-  function isPointing(landmarks) {
-    const indexUp = landmarks[8].y < landmarks[6].y - 0.03;
-    const othersDown = [12, 16, 20].every(
-      (tip) => landmarks[tip].y > landmarks[tip - 2].y - 0.01
-    );
-    return indexUp && othersDown;
+  function isOpenPalm(landmarks) {
+    const wristY = landmarks[0].y;
+    return [8, 12, 16, 20].every((tip) => landmarks[tip].y < wristY - 0.05);
   }
 
   hands.onResults((results) => {
@@ -51,11 +48,11 @@
       const landmarks = results.multiHandLandmarks[0];
 
       const isPinchingGesture = isPinching(landmarks);
-      const isPointingGesture = isPointing(landmarks);
+      const isPalmGesture = isOpenPalm(landmarks);
 
       if (isPinchingGesture) {
         window.scrollBy(0, 50); // scroll down
-      } else if (isPointingGesture) {
+      } else if (isPalmGesture) {
         window.scrollBy(0, -50); // scroll up
       }
     }
