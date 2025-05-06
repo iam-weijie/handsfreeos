@@ -53,7 +53,7 @@
       if (isPinchingGesture) {
         window.scrollBy(0, 50); // scroll down
       } else if (isPalmGesture) {
-        window.scrollBy(0, -50); // scroll up
+        window.scrollBy(0, -150); // scroll up
       }
     }
   });
