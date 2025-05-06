@@ -57,7 +57,7 @@ Instead of opening a new site, it injects code into the site you're on.
 
 - Inspired by Jedi powers ✨
 
-## 💥 Follow for more _Weijie's Tech Fails_
+## 💥 Follow for more of _Weijie's Tech Fails_
 
 Follow me for more side projects, and occasional magic tricks with code ✨
 
