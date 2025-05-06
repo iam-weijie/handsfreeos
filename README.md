@@ -53,6 +53,6 @@ Instead of opening a new site, it injects code into the site you're on.
 
 ## 🛠️ Credits
 
-- Built using [MediaPipe Hands](https://google.github.io/mediapipe/solutions/hands.html)
+- Built using [MediaPipe Hands](https://github.com/google-ai-edge/mediapipe/blob/master/docs/solutions/hands.md)
 
 - Inspired by Jedi powers ✨
