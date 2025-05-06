@@ -67,13 +67,13 @@
 
       // 👌 Pinch to scroll down (once every 500ms)
       if (isPinching(landmarks) && now - lastPinchTime > 500) {
-        window.scrollBy(0, 30);
+        window.scrollBy(0, 10);
         lastPinchTime = now;
       }
 
       // 👋 Wave to scroll up (once every 1000ms)
       if (detectWave(indexX) && now - lastWaveTime > 1000) {
-        window.scrollBy(0, -30);
+        window.scrollBy(0, -10);
         lastWaveTime = now;
       }
     }
