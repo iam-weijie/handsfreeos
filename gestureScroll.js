@@ -26,8 +26,6 @@
     minTrackingConfidence: 0.7,
   });
 
-  let wasPinching = false;
-
   function getDistance(a, b) {
     const dx = a.x - b.x;
     const dy = a.y - b.y;
@@ -43,13 +41,9 @@
 
       const isPinching = distance < 0.04;
 
-      if (isPinching && !wasPinching) {
+      if (isPinching) {
         window.scrollBy(0, 100); // scroll down once
       }
-
-      wasPinching = isPinching;
-    } else {
-      wasPinching = false;
     }
   });
 
