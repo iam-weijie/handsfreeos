@@ -47,9 +47,12 @@
   });
 
   setInterval(() => {
-    if (scrollDirection === 1) window.scrollBy(0, 20);
-    if (scrollDirection === -1) window.scrollBy(0, -20);
-  }, 50); // adjust speed here
+    if (scrollDirection === 1) {
+      window.scrollBy(0, 30);
+    } else if (scrollDirection === -1) {
+      window.scrollBy(0, -30);
+    }
+  }, 50); // scroll every 50ms
 
   const camera = new Camera(video, {
     onFrame: async () => {
