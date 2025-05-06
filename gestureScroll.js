@@ -71,8 +71,8 @@
         lastPinchTime = now;
       }
 
-      // 👋 Wave to scroll up (once every 1000ms)
-      if (detectWave(indexX) && now - lastWaveTime > 1000) {
+      // 👋 Wave to scroll up (once every 100ms)
+      if (detectWave(indexX) && now - lastWaveTime > 100) {
         window.scrollBy(0, -100);
         lastWaveTime = now;
       }
