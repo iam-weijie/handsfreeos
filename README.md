@@ -34,11 +34,11 @@ Instead of opening a new site, it injects code into the site you're on.
 2. Edit the bookmark
 
 3. Replace the URL with this:
+
    ```javascript
-   javascript: (function () {
-     var s = document.createElement("script");
-     s.src =
-       "https://cdn.jsdelivr.net/gh/iam-weijie/jedi-scroll/gestureScroll.js";
+   javascript: (() => {
+     const s = document.createElement("script");
+     s.src = "https://iam-weijie.github.io/jedi-scroll/gestureScroll.js";
      document.body.appendChild(s);
    })();
    ```
