@@ -34,19 +34,23 @@
   hands.onResults((results) => {
     if (results.multiHandLandmarks.length > 0) {
       const y = results.multiHandLandmarks[0][0].y;
-      const now = Date.now();
 
-      if (now - lastScrollTime > 100) {
-        // scroll only every 100ms
-        if (y < 0.35) {
-          window.scrollBy(0, -30); // scroll up
-        } else if (y > 0.65) {
-          window.scrollBy(0, 30); // scroll down
-        }
-        lastScrollTime = now;
+      if (y < 0.35) {
+        scrollDirection = -1; // scroll up
+      } else if (y > 0.65) {
+        scrollDirection = 1; // scroll down
+      } else {
+        scrollDirection = 0; // neutral zone = no scroll
       }
+    } else {
+      scrollDirection = 0; // no hand detected
     }
   });
+
+  setInterval(() => {
+    if (scrollDirection === 1) window.scrollBy(0, 20);
+    if (scrollDirection === -1) window.scrollBy(0, -20);
+  }, 50); // adjust speed here
 
   const camera = new Camera(video, {
     onFrame: async () => {
