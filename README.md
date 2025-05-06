@@ -2,26 +2,27 @@
 
 Control your browser like a Jedi:
 
-Use __hand gestures__ to scroll any webpage without touching your device.
+Use **hand gestures** to scroll any webpage without touching your device.
 
 ## ✨ Features
 
-- 👌 Pinch → Scroll __down__
+- 👌 Pinch → Scroll **down**
 
-- 👋 Wave (side to side) → Scroll __up__
+- 👋 Wave (side to side) → Scroll **up**
 
-- Works using your __webcam__ and __MediaPipe Hands__
+- Works using your **webcam** and **MediaPipe Hands**
 
-- No installation — just a __bookmarklet__
+- No installation — just a **bookmarklet**
 
 ## 🚀 How to Use
 
 ### 1. Enable Webcam Access
-   
+
 Make sure your browser has access to your webcam.
 This script runs inside the browser — no data is stored or sent anywhere.
 
 ### 2. What Is a Bookmarklet?
+
 A bookmarklet is a special bookmark that runs JavaScript on the current page.
 
 Instead of opening a new site, it injects code into the site you're on.
@@ -34,7 +35,12 @@ Instead of opening a new site, it injects code into the site you're on.
 
 3. Replace the URL with this:
    ```javascript
-   javascript:(function(){  var s = document.createElement('script');  s.src = 'https://cdn.jsdelivr.net/gh/iam-weijie/jedi-scroll/gestureScroll.js';  document.body.appendChild(s);})();
+   javascript: (function () {
+     var s = document.createElement("script");
+     s.src =
+       "https://cdn.jsdelivr.net/gh/iam-weijie/jedi-scroll/gestureScroll.js";
+     document.body.appendChild(s);
+   })();
    ```
 
 ## 🧠 Troubleshooting
@@ -47,6 +53,6 @@ Instead of opening a new site, it injects code into the site you're on.
 
 ## 🛠️ Credits
 
-- Built using MediaPipe Hands
+- Built using [MediaPipe Hands](https://google.github.io/mediapipe/solutions/hands.html)
 
 - Inspired by Jedi powers ✨
