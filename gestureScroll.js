@@ -1,30 +1,4 @@
 (async () => {
-  window.JediScrollActive = true;
-
-  // ✊ Detect fist (fingers curled)
-  function isFist(landmarks) {
-    const fingers = [8, 12, 16, 20];
-    return fingers.every((tip) => {
-      const base = tip - 2;
-      return Math.abs(landmarks[tip].y - landmarks[base].y) < 0.05;
-    });
-  }
-
-  // 🖐️ Open palm
-  function isOpenPalm(landmarks) {
-    const wristY = landmarks[0].y;
-    return [8, 12, 16, 20].every((tip) => landmarks[tip].y < wristY - 0.05);
-  }
-
-  // 👉 Pointing: index up, others down
-  function isPointing(landmarks) {
-    const indexUp = landmarks[8].y < landmarks[6].y - 0.03;
-    const othersDown = [12, 16, 20].every(
-      (tip) => landmarks[tip].y > landmarks[tip - 2].y - 0.01
-    );
-    return indexUp && othersDown;
-  }
-
   const script = document.createElement("script");
   script.src = "https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js";
   document.body.appendChild(script);
@@ -52,29 +26,30 @@
     minTrackingConfidence: 0.7,
   });
 
-  let scrollDirection = 0;
+  let isPinching = false;
+
+  function getDistance(a, b) {
+    const dx = a.x - b.x;
+    const dy = a.y - b.y;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
 
   hands.onResults((results) => {
     if (results.multiHandLandmarks.length > 0) {
       const landmarks = results.multiHandLandmarks[0];
-
-      if (isFist(landmarks)) {
-        scrollDirection = 1;
-      } else if (isPointing(landmarks)) {
-        scrollDirection = -1;
-      } else if (isOpenPalm(landmarks)) {
-        scrollDirection = 0;
-      } else {
-        scrollDirection = 0;
-      }
+      const thumbTip = landmarks[4];
+      const indexTip = landmarks[8];
+      const distance = getDistance(thumbTip, indexTip);
+      isPinching = distance < 0.04; // tweak threshold if needed
     } else {
-      scrollDirection = 0;
+      isPinching = false;
     }
   });
 
   setInterval(() => {
-    if (scrollDirection === 1) window.scrollBy(0, 30);
-    else if (scrollDirection === -1) window.scrollBy(0, -30);
+    if (isPinching) {
+      window.scrollBy(0, 30);
+    }
   }, 50);
 
   const camera = new Camera(video, {
