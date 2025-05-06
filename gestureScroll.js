@@ -38,22 +38,43 @@
     return getDistance(thumbTip, indexTip) < 0.035;
   }
 
-  function isOpenPalm(landmarks) {
-    const wristY = landmarks[0].y;
-    return [8, 12, 16, 20].every((tip) => landmarks[tip].y < wristY - 0.05);
+  // Wave detection logic
+  let lastXs = [];
+  let lastPinchTime = 0;
+  let lastWaveTime = 0;
+
+  function detectWave(x) {
+    lastXs.push(x);
+    if (lastXs.length > 10) lastXs.shift();
+
+    let swings = 0;
+    for (let i = 1; i < lastXs.length - 1; i++) {
+      const dir1 = lastXs[i] - lastXs[i - 1];
+      const dir2 = lastXs[i + 1] - lastXs[i];
+      if (dir1 * dir2 < 0 && Math.abs(dir1) > 0.02) {
+        swings++;
+      }
+    }
+
+    return swings >= 2;
   }
 
   hands.onResults((results) => {
     if (results.multiHandLandmarks.length > 0) {
       const landmarks = results.multiHandLandmarks[0];
+      const indexX = landmarks[8].x;
+      const now = Date.now();
 
-      const isPinchingGesture = isPinching(landmarks);
-      const isPalmGesture = isOpenPalm(landmarks);
+      // 👌 Pinch to scroll down (once every 500ms)
+      if (isPinching(landmarks) && now - lastPinchTime > 500) {
+        window.scrollBy(0, 30);
+        lastPinchTime = now;
+      }
 
-      if (isPinchingGesture) {
-        window.scrollBy(0, 50); // scroll down
-      } else if (isPalmGesture) {
-        window.scrollBy(0, -150); // scroll up
+      // 👋 Wave to scroll up (once every 1000ms)
+      if (detectWave(indexX) && now - lastWaveTime > 1000) {
+        window.scrollBy(0, -30);
+        lastWaveTime = now;
       }
     }
   });
