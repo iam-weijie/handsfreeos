@@ -65,8 +65,8 @@
       const indexX = landmarks[8].x;
       const now = Date.now();
 
-      // 👌 Pinch to scroll down (once every 100ms)
-      if (isPinching(landmarks) && now - lastPinchTime > 100) {
+      // 👌 Pinch to scroll down (once every 20ms)
+      if (isPinching(landmarks) && now - lastPinchTime > 20) {
         window.scrollBy(0, 100);
         lastPinchTime = now;
       }
