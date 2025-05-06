@@ -57,13 +57,13 @@ Instead of opening a new site, it injects code into the site you're on.
 
 - Inspired by Jedi powers ✨
 
-## 💥 Follow for more Weijie's Tech Fails
+## 💥 Follow for more _Weijie's Tech Fails_
 
 Follow me for more side projects, and occasional magic tricks with code ✨
 
 - [Instagram](https://www.instagram.com/iam._.weijie/)
 
-- [Tiktok](https://www.tiktok.com/@iam._.weijie)
+- [TikTok](https://www.tiktok.com/@iam._.weijie)
 
 - [Youtube](https://www.youtube.com/@iam_weijie)
 
